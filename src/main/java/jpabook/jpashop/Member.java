@@ -3,8 +3,6 @@ package jpabook.jpashop;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
-import org.springframework.web.bind.annotation.GetMapping;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -21,7 +19,7 @@ public class Member {
     @Embedded
     private Address address;
 
-    
+    @OneToMany(mappedBy = "member")
     private List<Order> orders = new ArrayList<>();
 
 }

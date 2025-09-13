@@ -1,22 +1,31 @@
 package jpabook.jpashop;
 
 import jakarta.persistence.*;
+import lombok.Getter;
+import lombok.Setter;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
-@Table(name = "ORDERS")
+@Table(name = "orders")
+@Getter @Setter
 public class Order {
 
     @Id @GeneratedValue
     @Column(name = "order_id")
     private Long id;
 
-    private Long memberId;
+    @ManyToOne
+    @JoinColumn(name = "member_id")
+    private Member member;
 
-    private Long deliveryId;
+    private List<OrderItem> orderItems = new ArrayList<>();
 
-    private LocalDateTime orderDate;
+    private Delivery delivery;
 
-    private Status status;
+    private LocalDateTime orderDate; // 주문시간
+
+    private OrderStatus status; // 주문상태 [ORDER, CANCEL]
 }
