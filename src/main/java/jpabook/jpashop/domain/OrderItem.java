@@ -13,14 +13,42 @@ public class OrderItem {
     @Column(name = "order_item_id")
     private Long id;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "item_id")
     private Item item;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "order_id")
     private Order order;
 
     private int orderPrice; // 주문 가격(주문 당시)
     private int count;      // 주문 수량
+
+    //==생성 메서드==//
+    // item보면 item에 가격있으니까 그걸로 가격하면 안됨?
+    // 쿠폰 받거나, 할인 받으면 바뀔수 있기 때문에
+    public static OrderItem createOrderItem(Item item, int orderPrice, int count) {
+        OrderItem orderItem = new OrderItem();
+        orderItem.setItem(item);
+        orderItem.setOrderPrice(orderPrice);
+        orderItem.setCount(count);
+
+        item.removeStock(count);
+
+        return orderItem;
+    }
+
+    //==비즈니스 로직==//
+    public void cancel() {
+        getItem().addStock(count);
+    }
+
+    //== 조회 로직==//
+
+    /**
+     * 주문상품 전체 가격 조회
+     */
+    public int getTotalPrice() {
+        return getOrderPrice() * getCount();
+    }
 }
