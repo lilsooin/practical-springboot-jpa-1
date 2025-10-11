@@ -2,9 +2,7 @@ package jpabook.jpashop.domain;
 
 import jakarta.persistence.*;
 import jpabook.jpashop.domain.item.Item;
-import lombok.AccessLevel;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Entity
@@ -28,7 +26,7 @@ public class OrderItem {
     private Order order;
 
     private int orderPrice; // 주문 가격(주문 당시)
-    private int count;      // 주문 수량
+    private int count;      // 주문 수량(아이템 재고가 아님, 하지만 주문수량으로 재고 깎이고 복원되고 함)
 
     //==생성 메서드==//
     // item보면 item에 가격있으니까 그걸로 가격하면 안됨?

@@ -32,6 +32,11 @@ class OrderServiceTest {
 
     @Test
     public void 상품주문() throws Exception {
+        // Order 메서드 테스트하는데
+        // orderitem, item, 멤버랑 배송도 다 만들어서 세팅해줘야하나?
+        // save 저장도 해줘야하나? -> 해줘야함
+        // item persist 해줘야하는거 아님? -> 맞다
+
         // given
         Member member = createMember();
 

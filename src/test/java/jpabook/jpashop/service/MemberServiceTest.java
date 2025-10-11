@@ -21,7 +21,8 @@ public class MemberServiceTest {
     @Autowired EntityManager em;
 
     @Test
-    @Rollback(false)
+    @Rollback(false) // - 영속성 컨텍스트로 테스트말고 DB에 직접 들어가는거 확인하고 싶으면 세팅해도 되는데
+                     // - 안 넣어도 됨
     public void 회원가입() throws Exception {
         // given
         Member member = new Member();
@@ -46,18 +47,18 @@ public class MemberServiceTest {
         // when
         memberService.join(member1);
         try {
+            System.out.println("111");
             memberService.join(member2); // 예외가 발생해야 한다!!!
         } catch (IllegalStateException e) {
+            System.out.println("2222");
             return;
         }
 
         // then
         fail("예외가 발생해야 한다.");
 
-
         //IllegalStateException 예외가 발생하지 않으면 테스트 실패
         // assertThrows(IllegalStateException.class, () ->
         //        memberService.join(member2));
-
     }
 }
