@@ -29,4 +29,10 @@ public class MemberApiController {
             this.id = id;
         }
     }
+
+    @PostMapping("/api/v2/members")
+    public CreateMemberResponse saveMemberV2() {
+
+        return new CreateMemberResponse();
+    }
 }
