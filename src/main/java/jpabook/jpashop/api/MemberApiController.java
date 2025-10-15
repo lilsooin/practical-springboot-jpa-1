@@ -31,8 +31,8 @@ public class MemberApiController {
     }
 
     @PostMapping("/api/v2/members")
-    public CreateMemberResponse saveMemberV2() {
-
-        return new CreateMemberResponse();
-    }
+//    public CreateMemberResponse saveMemberV2() {
+//
+//        return new CreateMemberResponse();
+//    }
 }
