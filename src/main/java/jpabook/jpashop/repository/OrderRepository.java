@@ -57,4 +57,14 @@ public class OrderRepository {
         }
         return query.getResultList();
     }
+
+    // 한방 쿼리로 order, member, delivery를 select절을 다 넣고 한 번에 가져옴
+    // 지연로딩 안 일어남
+    public List<Order> findAllWithMemberDelivery() {
+        return em.createQuery(
+                "select o from Order o " +
+                        " join fetch o.member m" +
+                        " join fetch o.delivery d", Order.class
+        ).getResultList();
+    }
 }
