@@ -77,7 +77,17 @@ public class OrderRepository {
                         " join fetch o.orderItems oi" +
                         " join fetch oi.item i", Order.class)
                 // .setFirstResult(1)
-                // .setMaxResults(100)
+                // .setMaxResults(100) paging 쓰면 안된
                 .getResultList(); // orderItem이 4개라 order가 4개로 찍힘
+    }
+
+    public List<Order> findAllWithMemberDelivery(int offset, int limit) {
+        return em.createQuery(
+                "select o from Order o " +
+                        " join fetch o.member m" +
+                        " join fetch o.delivery d", Order.class)
+                .setFirstResult(offset)
+                .setMaxResults(limit)
+                .getResultList();
     }
 }
